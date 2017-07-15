@@ -20,6 +20,10 @@ artifacts {
 
 scmVersion {
 
+    repository {
+        customKey = project.file('../secret_')
+    }
+
     //  sort versions and pick highest
     useHighestVersion = true
 
