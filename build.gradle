@@ -12,6 +12,12 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'pl.allegro.tech.build.axion-release'
 
+task mainJar(type: Jar)
+
+artifacts {
+    archives mainJar
+}
+
 scmVersion {
 
     //  sort versions and pick highest
