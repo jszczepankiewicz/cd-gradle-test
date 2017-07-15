@@ -21,6 +21,7 @@ artifacts {
 scmVersion {
 
     repository {
+        customUsername = 'js'
         customKey = project.file('../secret_')
     }
 
