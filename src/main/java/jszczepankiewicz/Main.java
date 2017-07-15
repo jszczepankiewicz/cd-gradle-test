@@ -7,6 +7,6 @@ package jszczepankiewicz;
 public class Main {
 
   public static void main(String...args){
-    System.out.println("italo disco rulez!");
+    System.out.println("italo disco rulez!@");
   }
 }
