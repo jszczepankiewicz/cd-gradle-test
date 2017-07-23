@@ -1,0 +1,123 @@
+/*
+    This is external script containing unified build logic for continous delivery across all projects.
+    It is externalized from the main script to allow easy upgrade & separation of concerns.
+ */
+
+buildscript {
+    repositories {
+        mavenLocal()
+        //  TODO: replace with proxied one
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'pl.allegro.tech.build:axion-release-plugin:1.7.1'
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5"
+    }
+}
+
+repositories {
+    mavenLocal()
+    //  TODO: replace with proxied one
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'maven-publish'
+/*
+    To apply a third-party plugin from an external build script,
+    you have to use the plugin's fully qualified class name, rather than its ID
+    More info: https://discuss.gradle.org/t/plugin-with-id-org-sonarqube-not-found/11588/12
+*/
+apply plugin: org.sonarqube.gradle.SonarQubePlugin
+apply plugin: pl.allegro.tech.build.axion.release.ReleasePlugin
+
+task mainJar(type: Jar, dependsOn: classes)
+
+task sourceJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+
+
+/**
+ * Custom source sets. Needed for integration testing.
+ */
+sourceSets {
+    integrationTests {
+        java {
+            srcDirs = ['src/integration-test/java']
+        }
+        resources {
+            srcDirs = ['src/integration-test/resources']
+        }
+
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+    }
+}
+
+configurations {
+    integrationTestsCompile.extendsFrom testCompile
+    integrationTestsRuntime.extendsFrom testRuntime
+}
+
+task integrationTest(type: Test, description: 'Runs the integration tests.', group: 'Verification', dependsOn: test) {
+    testClassesDirs = sourceSets.integrationTests.output.classesDirs
+    classpath = sourceSets.integrationTests.runtimeClasspath
+}
+
+check{
+    dependsOn integrationTest
+}
+
+artifacts {
+    archives mainJar
+    archives sourceJar
+}
+
+//  for maven publishing
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+    repositories {
+        maven {
+            //  externalize to local settings
+            url "http://localhost:8081/nexus/content/repositories/releases"
+            credentials {
+                username = "deployment"
+                password = "deployment123"
+            }
+        }
+    }
+}
+
+scmVersion {
+
+    repository {
+        customUsername = 'js'
+        customKey = project.file('../secret_')
+    }
+
+    //  sort versions and pick highest
+    useHighestVersion = true
+
+    repository { // Repository
+        type = 'git' // type of repository
+        directory = project.rootProject.file('./') // repository location
+        remote = 'origin' // remote name
+
+
+    }
+
+    tag {
+        prefix = 'release'
+    }
+}

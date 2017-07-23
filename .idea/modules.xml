@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/cd-gradle-test.iml" filepath="$PROJECT_DIR$/.idea/modules/cd-gradle-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cd-gradle-test_integrationTests.iml" filepath="$PROJECT_DIR$/.idea/modules/cd-gradle-test_integrationTests.iml" group="cd-gradle-test" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/cd-gradle-test_main.iml" filepath="$PROJECT_DIR$/.idea/modules/cd-gradle-test_main.iml" group="cd-gradle-test" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/cd-gradle-test_test.iml" filepath="$PROJECT_DIR$/.idea/modules/cd-gradle-test_test.iml" group="cd-gradle-test" />
     </modules>
