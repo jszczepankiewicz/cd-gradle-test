@@ -13,7 +13,12 @@ public class MainTestIT {
   private Main main = new Main();
 
   @Test
-  public void shouldBeFineInIntegrationTestToo(){
+  public void shouldBeFineInIntegrationTestToo() {
     assertThat(main.whatsTheNumber()).isEqualTo(3);
+  }
+
+  @Test
+  public void shouldShowUniqueForITCoverage() {
+    assertThat(main.whatsTheNumberForIntegrationTest()).isEqualTo(5);
   }
 }
