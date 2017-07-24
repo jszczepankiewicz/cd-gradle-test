@@ -1,9 +1,11 @@
 group 'jszczepankiewicz'
 version '1.0-SNAPSHOT'
 
+project.version = scmVersion.version
+
 apply from: 'ci.gradle'
 
-project.version = scmVersion.version
+
 
 sourceCompatibility = 1.8
 
