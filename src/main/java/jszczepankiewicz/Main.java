@@ -11,7 +11,7 @@ public class Main {
     return 3;
   }
 
-  public int whatsTheNumberForIntegrationTest(){ return 5;};
+  public int whatsTheNumberForIntegrationTest(){ return 5; };
 
   public static void main(String...args){
     System.out.println("italo disco rulez!@");
