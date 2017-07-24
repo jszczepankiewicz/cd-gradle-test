@@ -68,20 +68,29 @@ task integrationTest(type: Test, description: 'Runs the integration tests.', gro
     classpath = sourceSets.integrationTests.runtimeClasspath
 }
 
-
 task releaseLibrary(description: 'Execute all tests on library, release new version and publish to nexus.', group: 'publishing') {
     //dependsOn check
     //dependsOn release
     //dependsOn tasks.getByName("sonarqube")
 }
 
-check{
-    dependsOn integrationTest
-}
+//  we want that before running sonarqube both test & integrationTest will be triggered (by default only test)
+project.tasks["check"].dependsOn "integrationTest"
+project.tasks["sonarqube"].dependsOn "check"
+project.tasks["publish"].dependsOn "sonarqube"
+project.tasks["release"].dependsOn "check"
+
+
 
 artifacts {
     archives mainJar
     archives sourceJar
+}
+
+sonarqube{
+    properties{
+        property "sonar.jacoco.itReportPath", "$project.buildDir/jacoco/integrationTest.exec"
+    }
 }
 
 //  for maven publishing

@@ -2,7 +2,6 @@ TODO:
 
 3. invoking some external command
 4. spring boot
-5. separate unit vs integration tests (https://dzone.com/articles/integration-testing-with-gradle) & check with sonar
 
 PROCEDURE RELEASE:
 Prerequisites:
@@ -27,3 +26,10 @@ has to be two separate calls!
 
 tested on:
 gradle 4.0.1
+
+
+release procedure:
+gradle release
+gradle publish
+"release" will invoke check first
+"publish" will invoke sonarqube first
