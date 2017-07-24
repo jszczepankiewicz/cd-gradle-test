@@ -68,6 +68,9 @@ task integrationTest(type: Test, description: 'Runs the integration tests.', gro
     classpath = sourceSets.integrationTests.runtimeClasspath
 }
 
+task releaseLibrary(description: 'Executute all tests on library, release new version and publish to nexus.', group: 'publishing', dependsOn: check, sonarqube, release) {
+}
+
 check{
     dependsOn integrationTest
 }
