@@ -20,4 +20,7 @@ release:
 	
 Q&A:
 Where to store credentials: https://stackoverflow.com/questions/12749225/where-to-put-gradle-configuration-i-e-credentials-that-should-not-be-committe
-	
+WARNING: can not invoke in one release and publish!
+http://axion-release-plugin.readthedocs.io/en/latest/configuration/publishing.html
+
+has to be two separate calls!	
