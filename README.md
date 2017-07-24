@@ -24,3 +24,6 @@ WARNING: can not invoke in one release and publish!
 http://axion-release-plugin.readthedocs.io/en/latest/configuration/publishing.html
 
 has to be two separate calls!	
+
+tested on:
+gradle 4.0.1
