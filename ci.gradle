@@ -119,7 +119,8 @@ scmVersion {
 
     repository {
         customUsername = 'js'
-        customKey = project.file('../secret_')
+        customPassword = 'xyz'
+        //customKey = project.file('../secret_')
     }
 
     //  sort versions and pick highest

@@ -1,0 +1,6 @@
+/*
+    External script responsible for setting up user/password based git authentication required by underlying jgit plugin.
+    This password requires external credentials to be provided by properties. Please note that this script will fail if current
+    goal is release and there are no present properties.
+ */
+
