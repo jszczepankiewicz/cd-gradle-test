@@ -119,7 +119,7 @@ scmVersion {
 
     repository {
         customUsername = 'js'
-        //customPassword = 'xyz'
+        customPassword = 'xyz'
         //customKey = project.file('../secret_')
     }
 
